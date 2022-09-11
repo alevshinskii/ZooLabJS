@@ -16,10 +16,10 @@ test('Should Bison be friend with other animals', () => {
   expect(bison.friends).toContain('Elephant');
 });
 
-test('Should lion have required square feet', () => {
+test('Should Bison have required square feet', () => {
   expect(bison.requiredSpaceSqFt).toBe(1000);
 });
 
-test('Should Lions be friendly with each other', () => {
+test('Should Bisons be friendly with each other', () => {
   expect(bison.isFriendlyWithAnimal(bison)).toBe(true);
 });

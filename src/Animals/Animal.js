@@ -16,7 +16,6 @@ class Animal {
     if (animal instanceof Animal) {
       return this.friends.includes(animal.getType());
     }
-    throw new TypeError();
   }
 }
 
