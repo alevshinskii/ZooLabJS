@@ -22,3 +22,7 @@ test('should be able to feed animal', () => {
 test('should be able to feed animal', () => {
   expect(animal.heal(new Antibiotics())).toBeTruthy();
 });
+
+test('should be able to get animal type', () => {
+  expect(animal.getType()).toBe('Animal');
+});

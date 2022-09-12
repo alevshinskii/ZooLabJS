@@ -18,7 +18,10 @@ class Animal {
 
   isFriendlyWithAnimal(animal) {
     if (animal instanceof Animal) {
-      return this.friends.includes(animal.getType());
+      return (
+        this.friends.includes(animal.getType()) &&
+        animal.friends.includes(this.getType())
+      );
     }
   }
 
@@ -41,6 +44,10 @@ class Animal {
       this.isSick = false;
       return true;
     }
+  }
+
+  getType() {
+    return this.constructor.name.toString();
   }
 }
 

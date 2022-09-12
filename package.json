@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --watchAll",
+    "test": "jest --coverage --watch",
+    "test-all": "jest --coverage --watchAll",
     "test-cov": "jest --coverage",
     "start": "node index.js"
   },
