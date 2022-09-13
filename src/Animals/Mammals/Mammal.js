@@ -1,8 +1,8 @@
 import Animal from '../Animal.js';
 
 class Mammal extends Animal {
-  constructor() {
-    super();
+  constructor(isSick) {
+    super(isSick);
   }
 }
 

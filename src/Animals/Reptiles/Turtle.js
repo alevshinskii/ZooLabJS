@@ -1,8 +1,8 @@
 import Reptile from './Reptile';
 
 class Turtle extends Reptile {
-  constructor(props) {
-    super(props);
+  constructor(isSick) {
+    super(isSick);
   }
 
   requiredSpaceSqFt = 5;

@@ -1,8 +1,8 @@
 import Bird from './Bird';
 
 class Penguin extends Bird {
-  constructor(props) {
-    super(props);
+  constructor(isSick) {
+    super(isSick);
   }
 
   requiredSpaceSqFt = 10;

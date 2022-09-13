@@ -1,4 +1,5 @@
 import Animal from '../Animals/Animal';
+import Logger from '../Logger';
 
 class Enclosure {
   name;
@@ -16,7 +17,9 @@ class Enclosure {
   addAnimal(animal) {
     if (animal instanceof Animal) {
       this.animals.push(animal);
-      return true;
+      Logger.write(
+        'Animal with id ' + animal.id + ' added to enclosure ' + this.name,
+      );
     }
   }
 

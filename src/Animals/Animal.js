@@ -1,6 +1,7 @@
 import Food from '../Food/Food.js';
 import Medicine from '../Medicine/Medicine.js';
 import FeedTime from './FeedTime.js';
+import Logger from '../Logger';
 
 class Animal {
   id;
@@ -15,6 +16,7 @@ class Animal {
   constructor(isSick) {
     this.id = Animal.current_id++;
     this.isSick = isSick;
+    Logger.write('New animal created with id ' + this.id);
   }
 
   isFriendlyWithAnimal(animal) {

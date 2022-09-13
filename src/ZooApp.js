@@ -1,11 +1,13 @@
-class ZooApp{
-    #zoos=[]
+class ZooApp {
+  #zoos = [];
 
-    getZoos(){
-        return this.#zoos
-    }
+  getZoos() {
+    return this.#zoos;
+  }
 
-    addZoo(zoo){
-        this.#zoos.push(zoo)
-    }
+  addZoo(zoo) {
+    this.#zoos.push(zoo);
+  }
 }
+
+export default ZooApp;

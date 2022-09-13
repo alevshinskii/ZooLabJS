@@ -4,6 +4,10 @@ import Enclosure from '../src/Enclosures/Enclosure';
 import ZooKeeper from '../src/Employees/ZooKeeper';
 import Lion from '../src/Animals/Mammals/Lion';
 import Elephant from '../src/Animals/Mammals/Elephant';
+import NoAvailableEnclosureError from '../src/Errors/NoAvailableEnclosureError';
+import NoNeededExperienceError from '../src/Errors/NoNeededExperienceError';
+import Bison from '../src/Animals/Mammals/Bison';
+import Veterinarian from '../src/Employees/Veterinarian';
 
 test('Should be able to create Zoo', () => {
   const zoo = new Zoo('Zoo');
@@ -48,11 +52,12 @@ test('Should not be able to find enclosure for not friendly animals', () => {
   foundedEnclosureForElephant.addAnimal(elephant);
 
   const lion = new Lion();
-  const foundedEnclosureForLion = zoo.findAvailableEnclosure(lion);
-  expect(foundedEnclosureForLion).toBeNull();
+  expect(() => zoo.findAvailableEnclosure(lion)).toThrowError(
+    NoAvailableEnclosureError,
+  );
 });
 
-test('Should return null if no available space for animals in enclosure', () => {
+test('Should throw error if no available space for animals in enclosure', () => {
   const zoo = new Zoo('Zoo');
   const enclosure = new Enclosure('Enclosure', 1000);
   zoo.addEnclosure(enclosure);
@@ -63,7 +68,78 @@ test('Should return null if no available space for animals in enclosure', () => 
   foundedEnclosureForElephant.addAnimal(elephant);
 
   const elephant2 = new Elephant();
-  const foundedEnclosureForOneMoreElephant =
-    zoo.findAvailableEnclosure(elephant2);
-  expect(foundedEnclosureForOneMoreElephant).toBeNull();
+
+  expect(() => zoo.findAvailableEnclosure(elephant2)).toThrowError(
+    NoAvailableEnclosureError,
+  );
+});
+
+test('Should throw error if trying to hire employee without experience', () => {
+  const zoo = new Zoo('Zoo');
+  const enclosure = new Enclosure('Enclosure', 1000);
+  zoo.addEnclosure(enclosure);
+
+  const elephant = new Elephant();
+  zoo.findAvailableEnclosure(elephant).addAnimal(elephant);
+
+  const zooKeeper = new ZooKeeper('firstName', 'lastName');
+  expect(() => zoo.hireEmployee(zooKeeper)).toThrowError(
+    NoNeededExperienceError,
+  );
+});
+
+test('Should throw error if trying to find enclosure for animal with invalid type', () => {
+  const zoo = new Zoo('Zoo');
+  const enclosure = new Enclosure('Enclosure', 1000);
+  zoo.addEnclosure(enclosure);
+
+  expect(() =>
+    zoo.findAvailableEnclosure(new ZooKeeper('firstName', 'lastName')),
+  ).toThrowError(TypeError);
+});
+
+test('Should be able to feed all animals', () => {
+  const zoo = new Zoo('Zoo');
+  const enclosure = new Enclosure('Enclosure', 9000);
+  zoo.addEnclosure(enclosure);
+
+  const bison = new Bison();
+  const elephant = new Elephant();
+
+  zoo.findAvailableEnclosure(bison).addAnimal(bison);
+  zoo.findAvailableEnclosure(elephant).addAnimal(elephant);
+
+  const zooKeeper = new ZooKeeper('New', 'ZooKeeper');
+  zooKeeper.addAnimalExperience(bison);
+  zooKeeper.addAnimalExperience(elephant);
+
+  zoo.hireEmployee(zooKeeper);
+
+  zoo.feedAnimals();
+
+  expect(zoo.getAllAnimals().filter((a) => a.feedTimes.length > 0).length).toBe(
+    2,
+  );
+});
+
+test('Should be able to heal all animals', () => {
+  const zoo = new Zoo('Zoo');
+  const enclosure = new Enclosure('Enclosure', 9000);
+  zoo.addEnclosure(enclosure);
+
+  const bison = new Bison(true);
+  const elephant = new Elephant(true);
+
+  zoo.findAvailableEnclosure(bison).addAnimal(bison);
+  zoo.findAvailableEnclosure(elephant).addAnimal(elephant);
+
+  const vet = new Veterinarian('New', 'ZooKeeper');
+  vet.addAnimalExperience(bison);
+  vet.addAnimalExperience(elephant);
+
+  zoo.hireEmployee(vet);
+
+  zoo.healAnimals();
+
+  expect(zoo.getAllAnimals().filter((a) => !a.isSick).length).toBe(2);
 });

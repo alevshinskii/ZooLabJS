@@ -1,8 +1,8 @@
 import Mammal from './Mammal.js';
 
 class Lion extends Mammal {
-  constructor(props) {
-    super(props);
+  constructor(isSick) {
+    super(isSick);
   }
 
   requiredSpaceSqFt = 1000;
