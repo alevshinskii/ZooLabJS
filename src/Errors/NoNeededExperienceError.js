@@ -1,0 +1,1 @@
+class NoNeededExperienceError extends Error {}

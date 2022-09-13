@@ -1,4 +1,4 @@
-import ZooKeeper from '../Employees/ZooKeeper';
+import ZooKeeper from '../Employees/ZooKeeper.js';
 
 class FeedTime {
   time;

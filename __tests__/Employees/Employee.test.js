@@ -1,8 +1,9 @@
-import ZooKeeper from '../../src/Employees/ZooKeeper';
+import ZooKeeper from '../../src/Employees/ZooKeeper.js';
 import { expect, test } from '@jest/globals';
-import Animal from '../../src/Animals/Animal';
-import Elephant from '../../src/Animals/Mammals/Elephant';
-import Lion from '../../src/Animals/Mammals/Lion';
+import Animal from '../../src/Animals/Animal.js';
+import Elephant from '../../src/Animals/Mammals/Elephant.js';
+import Lion from '../../src/Animals/Mammals/Lion.js';
+import Veterinarian from '../../src/Employees/Veterinarian';
 
 test('Should be able to create ZooKeeper', () => {
   const zooKeeper = new ZooKeeper('firstName', 'lastName');
@@ -30,4 +31,21 @@ test('Should check return false if has no animal experience', () => {
   const zooKeeper = new ZooKeeper('firstName', 'lastName');
   zooKeeper.addAnimalExperience(new Elephant());
   expect(zooKeeper.hasAnimalExperience(new Lion())).toBeFalsy();
+});
+
+//
+
+test('Should be able to create Veterinarian', () => {
+  const veterinarian = new Veterinarian('firstName', 'lastName');
+  expect(veterinarian.lastName).toBe('lastName');
+});
+
+test('Should be able Veterinarian to heal animal', () => {
+  const veterinarian = new Veterinarian('firstName', 'lastName');
+  const elephant = new Elephant(true);
+
+  veterinarian.addAnimalExperience(elephant);
+  veterinarian.healAnimal(elephant);
+
+  expect(elephant.isSick).toBeFalsy();
 });

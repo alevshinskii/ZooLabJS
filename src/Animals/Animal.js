@@ -1,6 +1,6 @@
 import Food from '../Food/Food.js';
 import Medicine from '../Medicine/Medicine.js';
-import FeedTime from './FeedTime';
+import FeedTime from './FeedTime.js';
 
 class Animal {
   id;
@@ -12,8 +12,9 @@ class Animal {
   friends = [];
   static current_id = 1;
 
-  constructor() {
+  constructor(isSick) {
     this.id = Animal.current_id++;
+    this.isSick = isSick;
   }
 
   isFriendlyWithAnimal(animal) {

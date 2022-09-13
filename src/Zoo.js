@@ -39,6 +39,17 @@ class Zoo {
     }
     return null;
   }
+
+  getAllAnimals() {
+    let animalsList = [];
+    for (let i = 0; i < this.enclosures.length; i++) {
+      const enclosure = this.enclosures[i];
+      for (let j = 0; j < enclosure.animals.length; j++) {
+        animalsList.push(enclosure.animals[j]);
+      }
+    }
+    return animalsList;
+  }
 }
 
 export default Zoo;
